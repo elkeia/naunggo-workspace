@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>naunggo 작업공간</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ── 헤더 ── -->
+<header>
+  <div class="header-left"></div>
+  <div class="header-center">
+    <h1>naunggo 작업공간</h1>
+  </div>
+  <div class="header-right" id="header-right">
+    <button class="btn btn-outline" onclick="openModal('login')">로그인</button>
+    <button class="btn btn-fill" onclick="openModal('signup')">회원가입</button>
+  </div>
+</header>
+
+<!-- ── 네비게이션 ── -->
+<nav>
+  <button class="nav-btn" data-menu="소개" onclick="selectMenu(this)">소개</button>
+  <button class="nav-btn" data-menu="시" onclick="selectMenu(this)">시</button>
+  <button class="nav-btn" data-menu="그림" onclick="selectMenu(this)">그림</button>
+  <button class="nav-btn" data-menu="정보" onclick="selectMenu(this)">정보</button>
+  <button class="nav-btn" data-menu="게시판" onclick="selectMenu(this)">게시판</button>
+</nav>
+
+<!-- ── 본문 3단 ── -->
+<div class="main-layout">
+
+  <!-- 좌측: 서브메뉴 -->
+  <aside class="sidebar card" id="sidebar">
+    <div class="card-header" id="sidebar-title">메뉴</div>
+    <div id="sidebar-content">
+      <p class="sidebar-empty">상단 메뉴를<br>선택해 주세요</p>
+    </div>
+  </aside>
+
+  <!-- 중앙: 메인 콘텐츠 -->
+  <main class="content-area card">
+    <div class="content-inner" id="main-content">
+      <div class="welcome-section">
+        <h2>naunggo 작업공간에 오신 것을 환영합니다</h2>
+        <p>이곳은 창작의 공간입니다.<br>시, 그림, 그리고 다양한 작업들을 함께 나눕니다.</p>
+        <div class="welcome-grid">
+          <div class="welcome-card">
+            <div class="icon">✍️</div>
+            <h3>시</h3>
+            <p>감성적인 시 작품들을 만나보세요</p>
+          </div>
+          <div class="welcome-card">
+            <div class="icon">🎨</div>
+            <h3>그림</h3>
+            <p>다양한 화풍의 그림 작품들</p>
+          </div>
+          <div class="welcome-card">
+            <div class="icon">💬</div>
+            <h3>게시판</h3>
+            <p>자유롭게 소통하는 공간</p>
+          </div>
+          <div class="welcome-card">
+            <div class="icon">📖</div>
+            <h3>소개</h3>
+            <p>작가와 작업 철학 소개</p>
+          </div>
+          <div class="welcome-card">
+            <div class="icon">ℹ️</div>
+            <h3>정보</h3>
+            <p>공지사항 및 최신 정보</p>
+          </div>
+          <div class="welcome-card">
+            <div class="icon">🤖</div>
+            <h3>AI 채팅</h3>
+            <p>오른쪽 채팅창에서 대화하세요</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 우측: LLM 채팅창 -->
+  <aside class="chat-panel card">
+    <div class="card-header">
+      <div class="chat-label">
+        <div class="chat-dot"></div>
+        AI 어시스턴트
+      </div>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-bubble bot">
+        안녕하세요! 저는 naunggo 작업공간의 AI 어시스턴트입니다. 무엇이든 물어보세요 😊
+        <span class="time" id="init-time"></span>
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <textarea class="chat-input" id="chat-input" placeholder="메시지를 입력하세요..." rows="1"
+        onkeydown="handleChatKey(event)" oninput="autoResize(this)"></textarea>
+      <button class="chat-send-btn" onclick="sendChat()" title="전송">&#9658;</button>
+    </div>
+  </aside>
+
+</div>
+
+<!-- ── 로그인 모달 ── -->
+<div class="modal-overlay" id="modal-login">
+  <div class="modal-box">
+    <h2>로그인</h2>
+    <div class="modal-field">
+      <label>아이디</label>
+      <input id="login-id" type="text" placeholder="아이디 입력" />
+    </div>
+    <div class="modal-field">
+      <label>비밀번호</label>
+      <input id="login-pw" type="password" placeholder="비밀번호 입력" />
+    </div>
+    <span class="modal-error" id="modal-login-error"></span>
+    <button class="modal-submit" onclick="handleLogin()">로그인</button>
+    <span class="modal-close" onclick="closeModal('login')">닫기</span>
+  </div>
+</div>
+
+<!-- ── 회원가입 모달 ── -->
+<div class="modal-overlay" id="modal-signup">
+  <div class="modal-box">
+    <h2>회원가입</h2>
+    <div class="modal-field">
+      <label>아이디 <small style="color:#aaa">(3자 이상)</small></label>
+      <input id="signup-id" type="text" placeholder="아이디 입력" />
+    </div>
+    <div class="modal-field">
+      <label>닉네임</label>
+      <input id="signup-nickname" type="text" placeholder="닉네임 입력" />
+    </div>
+    <div class="modal-field">
+      <label>비밀번호 <small style="color:#aaa">(4자 이상)</small></label>
+      <input id="signup-pw" type="password" placeholder="비밀번호 입력" />
+    </div>
+    <div class="modal-field">
+      <label>비밀번호 확인</label>
+      <input id="signup-pw2" type="password" placeholder="비밀번호 재입력" />
+    </div>
+    <span class="modal-error" id="modal-signup-error"></span>
+    <button class="modal-submit" onclick="handleSignup()">가입하기</button>
+    <span class="modal-close" onclick="closeModal('signup')">닫기</span>
+  </div>
+</div>
+
+<!-- ── 관리자 패널 모달 ── -->
+<div class="modal-overlay" id="modal-admin">
+  <div class="modal-admin-box">
+    <div class="modal-admin-header">
+      <h2>⚙ 관리자 패널</h2>
+      <button class="modal-admin-close" onclick="closeAdminPanel()">✕</button>
+    </div>
+    <div id="admin-panel-body"></div>
+  </div>
+</div>
+
+<!-- JS 로드 순서: data → auth → nav → chat → modal → admin -->
+<script src="js/data.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/admin.js"></script>
+
+</body>
+</html>
