@@ -543,3 +543,29 @@ function previewImages(input) {
 function getPreviewImages() {
   return Array.from(document.querySelectorAll('.preview-img')).map(img => img.src);
 }
+
+// ── 모바일: 사이드바 드로어 토글 ─────────────────────────
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  if (sidebar.classList.contains('drawer-open')) {
+    closeSidebar();
+  } else {
+    sidebar.classList.add('drawer-open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar')?.classList.remove('drawer-open');
+  document.getElementById('sidebar-overlay')?.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// 서브메뉴 항목 클릭 시 드로어 자동 닫기
+document.addEventListener('click', function(e) {
+  if (e.target.closest('#sidebar-content li') && window.innerWidth <= 768) {
+    setTimeout(closeSidebar, 120);
+  }
+});

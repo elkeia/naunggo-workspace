@@ -69,3 +69,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const initTime = document.getElementById('init-time');
   if (initTime) initTime.textContent = getTime();
 });
+
+// ── 모바일: AI 채팅 패널 슬라이드업 토글 ─────────────────
+function toggleChatPanel() {
+  const panel = document.querySelector('.chat-panel');
+  const overlay = document.getElementById('chat-overlay');
+  if (panel.classList.contains('chat-open')) {
+    closeChatPanel();
+  } else {
+    panel.classList.add('chat-open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    const msgs = document.getElementById('chat-messages');
+    if (msgs) msgs.scrollTop = msgs.scrollHeight;
+  }
+}
+
+function closeChatPanel() {
+  document.querySelector('.chat-panel')?.classList.remove('chat-open');
+  document.getElementById('chat-overlay')?.classList.remove('open');
+  document.body.style.overflow = '';
+}
