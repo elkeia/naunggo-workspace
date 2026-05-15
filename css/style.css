@@ -966,7 +966,8 @@ nav {
    태블릿 (≤ 1100px): 채팅창 숨기고 2단
 ══════════════════════════════════════════════ */
 @media (max-width: 1100px) {
-  .main-layout {
+  .main-layout,
+  .main-layout.menu-active {
     grid-template-columns: 200px 1fr;
   }
   .chat-panel {
@@ -1008,7 +1009,8 @@ nav {
   }
 
   /* ── 메인 레이아웃: 1단 ── */
-  .main-layout {
+  .main-layout,
+  .main-layout.menu-active {
     grid-template-columns: 1fr;
     padding: 12px;
     gap: 0;
