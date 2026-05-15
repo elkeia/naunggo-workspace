@@ -50,6 +50,9 @@ header {
 .header-right {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
   gap: 10px;
 }
 
@@ -674,8 +677,12 @@ nav {
   padding: 6px 12px;
   background: rgba(176,109,192,0.12);
   border-radius: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
 }
-.logout-btn { font-size: 0.82rem; }
+.logout-btn { font-size: 0.82rem; white-space: nowrap; }
 .btn-admin {
   padding: 7px 14px;
   border-radius: 16px;
@@ -989,7 +996,13 @@ nav {
   .header-emblem { height: 32px; }
   .hamburger-btn { display: flex; }
   .btn { padding: 6px 11px; font-size: 0.78rem; }
-  .header-right { gap: 6px; }
+  .header-right { gap: 4px; }
+  .user-badge { font-size: 0.72rem; padding: 4px 8px; max-width: 80px; }
+  .logout-btn { font-size: 0.7rem; padding: 5px 8px; }
+  .btn-admin { font-size: 0.7rem; padding: 5px 8px; }
+
+  /* ── 모바일 홈화면: AI 어시스턴트 숨김 ── */
+  .chat-panel { display: none !important; }
 
   /* ── 네비게이션: 가로 스크롤 ── */
   nav {
