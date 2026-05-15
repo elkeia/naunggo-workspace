@@ -544,6 +544,37 @@ function getPreviewImages() {
   return Array.from(document.querySelectorAll('.preview-img')).map(img => img.src);
 }
 
+// ── 홈(환영 화면)으로 이동 ───────────────────────────────
+function goHome() {
+  currentMenu = null;
+  currentSub  = null;
+  currentPage = 1;
+  searchQuery = '';
+
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.main-layout').classList.remove('menu-active');
+
+  document.getElementById('sidebar-title').textContent = '메뉴';
+  document.getElementById('sidebar-content').innerHTML =
+    '<p class="sidebar-empty">상단 메뉴를<br>선택해 주세요</p>';
+
+  document.getElementById('main-content').innerHTML = `
+    <div class="welcome-section">
+      <h2>naunggo 작업공간에 오신 것을 환영합니다</h2>
+      <p>이곳은 창작의 공간입니다.<br>시, 그림, 그리고 다양한 작업들을 함께 나눕니다.</p>
+      <div class="welcome-grid">
+        <div class="welcome-card"><div class="icon">✍️</div><h3>시</h3><p>감성적인 시 작품들을 만나보세요</p></div>
+        <div class="welcome-card"><div class="icon">🎨</div><h3>그림</h3><p>다양한 화풍의 그림 작품들</p></div>
+        <div class="welcome-card"><div class="icon">💬</div><h3>게시판</h3><p>자유롭게 소통하는 공간</p></div>
+        <div class="welcome-card"><div class="icon">📖</div><h3>소개</h3><p>작가와 작업 철학 소개</p></div>
+        <div class="welcome-card"><div class="icon">ℹ️</div><h3>정보</h3><p>공지사항 및 최신 정보</p></div>
+        <div class="welcome-card"><div class="icon">🤖</div><h3>AI 채팅</h3><p>오른쪽 채팅창에서 대화하세요</p></div>
+      </div>
+    </div>`;
+
+  if (window.innerWidth <= 768) closeSidebar();
+}
+
 // ── 모바일: 사이드바 드로어 토글 ─────────────────────────
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');

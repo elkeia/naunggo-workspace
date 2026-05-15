@@ -19,8 +19,25 @@ header {
   border-bottom: 1px solid rgba(255,255,255,0.6);
   box-shadow: 0 2px 12px rgba(180,130,200,0.12);
 }
-.header-left { /* 빈 공간 */ }
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header-emblem {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+}
 .header-center { text-align: center; }
+.header-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  cursor: pointer;
+  transition: opacity 0.18s;
+}
+.header-logo:hover { opacity: 0.78; }
 .header-center h1 {
   font-size: 1.7rem;
   font-weight: 700;
@@ -967,7 +984,8 @@ nav {
     padding: 13px 14px;
     gap: 8px;
   }
-  .header-center h1 { font-size: 1.15rem; }
+  .header-logo { height: 34px; }
+  .header-emblem { height: 32px; }
   .hamburger-btn { display: flex; }
   .btn { padding: 6px 11px; font-size: 0.78rem; }
   .header-right { gap: 6px; }
