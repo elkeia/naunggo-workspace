@@ -90,7 +90,7 @@ nav {
 /* ── 본문 3단 레이아웃 ── */
 .main-layout {
   display: grid;
-  grid-template-columns: 200px 1fr 280px;
+  grid-template-columns: 200px 1fr;
   gap: 16px;
   padding: 20px 24px;
   min-height: calc(100vh - 130px);
@@ -479,11 +479,9 @@ nav {
   border-top: 1px solid rgba(176,109,192,0.15);
 }
 
-/* ── 우측 채팅창 ── */
+/* ── 우측 채팅창 (기본 숨김 — 버튼으로만 열림) ── */
 .chat-panel {
-  position: sticky;
-  top: 20px;
-  display: flex;
+  display: none;
   flex-direction: column;
   height: calc(100vh - 170px);
 }
@@ -922,7 +920,7 @@ nav {
   transition: all 0.2s;
 }
 
-/* ── 드로어·채팅 오버레이 ── */
+/* ── 드로어 오버레이 ── */
 .sidebar-overlay,
 .chat-overlay {
   display: none;
@@ -931,12 +929,15 @@ nav {
   background: rgba(0,0,0,0.38);
   z-index: 55;
 }
-.sidebar-overlay.open,
-.chat-overlay.open { display: block; }
+.sidebar-overlay.open { display: block; }
+/* 채팅 오버레이는 모바일에서만 사용 */
+@media (max-width: 768px) {
+  .chat-overlay.open { display: block; }
+}
 
-/* ── AI 채팅 플로팅 버튼 (데스크탑에서 숨김) ── */
+/* ── AI 채팅 플로팅 버튼 (모든 화면에서 표시) ── */
 .chat-float-btn {
-  display: none;
+  display: flex;
   position: fixed;
   bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   right: 20px;
@@ -956,17 +957,28 @@ nav {
 .chat-float-btn:hover { transform: scale(1.08); }
 
 /* ══════════════════════════════════════════════
-   태블릿 (≤ 1100px): 우측 채팅창 숨기고 2단
+   데스크탑: 채팅 패널 열림 상태 (fixed 우측 패널)
+══════════════════════════════════════════════ */
+@media (min-width: 769px) {
+  .chat-panel.chat-open {
+    display: flex;
+    position: fixed;
+    top: 130px;
+    right: 20px;
+    width: 290px;
+    height: calc(100vh - 150px);
+    border-radius: 18px;
+    z-index: 50;
+    box-shadow: 0 8px 32px rgba(176,109,192,0.25);
+  }
+}
+
+/* ══════════════════════════════════════════════
+   태블릿 (≤ 1100px)
 ══════════════════════════════════════════════ */
 @media (max-width: 1100px) {
   .main-layout {
     grid-template-columns: 200px 1fr;
-  }
-  .chat-panel {
-    display: none;
-  }
-  .chat-float-btn {
-    display: flex;
   }
 }
 
@@ -1039,7 +1051,6 @@ nav {
     transition: transform 0.3s cubic-bezier(.4,0,.2,1);
   }
   .chat-panel.chat-open { transform: translateY(0); }
-  .chat-float-btn { display: flex; }
 
   /* ── 환영 그리드: 2열 ── */
   .welcome-grid {

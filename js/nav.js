@@ -109,7 +109,6 @@ function renderBoardList(posts, menu, sub, page) {
     };
     searchInput.addEventListener('compositionend', doSearch);
     searchInput.addEventListener('input', (e) => { if (!e.isComposing) doSearch(); });
-    searchInput.focus();
   }
 
   renderBoardListBody(posts, menu, sub, page);
