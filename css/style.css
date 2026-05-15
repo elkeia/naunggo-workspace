@@ -1028,16 +1028,17 @@ nav {
   .chat-panel {
     display: flex;
     position: fixed;
-    bottom: -100%;
+    bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
     height: 72vh;
     border-radius: 20px 20px 0 0;
     z-index: 60;
-    transition: bottom 0.3s cubic-bezier(.4,0,.2,1);
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
   }
-  .chat-panel.chat-open { bottom: 0; }
+  .chat-panel.chat-open { transform: translateY(0); }
   .chat-float-btn { display: flex; }
 
   /* ── 환영 그리드: 2열 ── */
