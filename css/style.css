@@ -90,7 +90,7 @@ nav {
 /* ── 본문 3단 레이아웃 ── */
 .main-layout {
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 200px 1fr 280px;
   gap: 16px;
   padding: 20px 24px;
   min-height: calc(100vh - 130px);
@@ -479,11 +479,19 @@ nav {
   border-top: 1px solid rgba(176,109,192,0.15);
 }
 
-/* ── 우측 채팅창 (기본 숨김 — 버튼으로만 열림) ── */
+/* ── 우측 채팅창 (홈에서 표시, 메뉴 선택 시 숨김) ── */
 .chat-panel {
-  display: none;
+  position: sticky;
+  top: 20px;
+  display: flex;
   flex-direction: column;
   height: calc(100vh - 170px);
+}
+.main-layout.menu-active {
+  grid-template-columns: 200px 1fr;
+}
+.main-layout.menu-active .chat-panel {
+  display: none;
 }
 .chat-messages {
   flex: 1;
@@ -936,29 +944,16 @@ nav {
 }
 
 
-/* ══════════════════════════════════════════════
-   데스크탑: 채팅 패널 열림 상태 (fixed 우측 패널)
-══════════════════════════════════════════════ */
-@media (min-width: 769px) {
-  .chat-panel.chat-open {
-    display: flex;
-    position: fixed;
-    top: 130px;
-    right: 20px;
-    width: 290px;
-    height: calc(100vh - 150px);
-    border-radius: 18px;
-    z-index: 50;
-    box-shadow: 0 8px 32px rgba(176,109,192,0.25);
-  }
-}
 
 /* ══════════════════════════════════════════════
-   태블릿 (≤ 1100px)
+   태블릿 (≤ 1100px): 채팅창 숨기고 2단
 ══════════════════════════════════════════════ */
 @media (max-width: 1100px) {
   .main-layout {
     grid-template-columns: 200px 1fr;
+  }
+  .chat-panel {
+    display: none;
   }
 }
 

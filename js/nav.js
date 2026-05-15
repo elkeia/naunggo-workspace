@@ -28,6 +28,7 @@ function selectMenu(btn) {
   currentSub   = menuData[currentMenu].submenus[0];
   currentPage  = 1;
   searchQuery  = '';
+  document.querySelector('.main-layout').classList.add('menu-active');
   renderSidebar(currentMenu);
   renderContent(currentMenu, currentSub);
 }
