@@ -935,26 +935,6 @@ nav {
   .chat-overlay.open { display: block; }
 }
 
-/* ── AI 채팅 플로팅 버튼 (모든 화면에서 표시) ── */
-.chat-float-btn {
-  display: flex;
-  position: fixed;
-  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
-  right: 20px;
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  border: none;
-  background: linear-gradient(135deg, #b06dc0, #7b9eed);
-  font-size: 1.45rem;
-  cursor: pointer;
-  box-shadow: 0 4px 18px rgba(176,109,192,0.45);
-  z-index: 40;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s;
-}
-.chat-float-btn:hover { transform: scale(1.08); }
 
 /* ══════════════════════════════════════════════
    데스크탑: 채팅 패널 열림 상태 (fixed 우측 패널)
